@@ -1,0 +1,19 @@
+version: "3"
+
+services:  
+  jupyter:
+    image: jupyter/scipy-notebook
+    #restart: unless-stopped
+    #command: ['start-notebook.sh', '--ip', '0.0.0.0', '--no-browser', "--NotebookApp.password='sha1:xxPASSWORD_GENERATED_BY_IPYTHON_IN_TERMINALxxx'", "--NotebookApp.allow_origin='*'"]
+    #command: ['start-notebook.sh', '--ip', '0.0.0.0', '--no-browser', "--NotebookApp.allow_origin='*'"]
+    command: ['jupyter-lab', '--ip=0.0.0.0', '--port=8888', '--allow-root', '--no-browser', '--notebook-dir=/home/jovyan/work']
+    environment:
+      - CHOWN_HOME=yes
+      - NB_UID=1000
+    #expose: 
+    #  - 8888
+    ports:
+       - 8888:8888
+    user: root
+    volumes:
+      - /home/ypl/NLP_workspace/local_dev_home/Fraud_Massage_Analysis/notebooks:/home/jovyan/work
